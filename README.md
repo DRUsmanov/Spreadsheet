@@ -36,3 +36,24 @@
 Числовые литералы (целые и вещественные).
 
 Ссылки на ячейки (латинская буква — столбец, число — строка, например B2).
+
+## Сборка:
+~~~
+mkdir build && cd build
+cmake .. -DCMAKE_POLICY_VERSION_MINIMUM=X # Замените X на версию cmake, обязательно старше 3.5
+cmake --build .
+~~~
+Если собирать проект без указания доп. параметра возникает ошибка:
+~~~
+CMake Error at build/_deps/googletest-src/CMakeLists.txt:4 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 has been removed from CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+  Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+~~~
+После успешной сборки в директории build появится исполняемый файл spreadsheet.exe. Он запускает набор тестов, демонстрирующих работу библиотеки.
+
+Для использования библиотеки в своём проекте подключите исходные файлы или соберите статическую библиотеку (для этого потребуется модифицировать CMakeLists.txt).
